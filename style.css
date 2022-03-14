@@ -1,3 +1,139 @@
+:root {
+    --gray1: #192a32;
+    --cell: #1f3540;
+    --result: #1f3540e1;
+    --light-gray: #a8bec9;
+    --yellow: #f2b237;
+    --aqua: #31c4be;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background-color: hotpink;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray1);
+}
+
+.controller {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#change-option {
+    background-color: var(--yellow);
+}
+
+#change-option:hover {
+    background-color: transparent;
+    color: var(--yellow);
+}
+
+#turn {
+    background-color: var(--gray1);
+    color: #fff;
+    cursor: default;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 2px solid var(--light-gray);
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 70px;
+    cursor: pointer;
+}
+
+table tr:first-child td {
+    border-top: 0;
+}
+
+
+table tr:last-child td {
+    border-bottom: 0;
+}
+
+table tr td:first-child {
+    border-left: 0;
+}
+
+table tr td:last-child {
+    border-right: 0;
+}
+
+.endgame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    border-radius: 5px;
+    background-color: var(--result);
+    font-size: 2em;
+}
+
+.text {
+    color: var(--aqua);
+    font-size: larger;
+    font-weight: bold;
+}
+
+.btn-group {
+    
+}
+
+.btn-group .btn {
+    padding: 5px 10px;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    cursor: pointer;
+    color: var(--gray1);
+}
+
+#ha {
+    background-color: var(--yellow);
+}
+
+#ha:hover {
+    background-color: transparent;
+    color: var(--yellow);
+}
+
+#hh {
+    background-color: var(--aqua);
+}
+
+#hh:hover {
+    background-color: transparent;
+    color: var(--aqua);
+}
+
+#replay {
+    background-color: var(--light-gray);
+}
+
+#replay:hover {
+    background-color: transparent;
+    color: var(--light-gray);
 }

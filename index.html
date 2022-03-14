@@ -4,12 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Tic Tac Toe</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Initial setup</h1>
-
+    <div class="controller btn-group">
+        <button class="btn" id="change-option">Change Options</button>
+        <button class="btn turn" id="turn">"X" turn!</button>
+        <button class="btn" onclick="startGame()" id="replay">Replay</button>
+    </div>
+    <table>
+        <tr>
+            <td class="cell" id="0"></td>
+            <td class="cell" id="1"></td>
+            <td class="cell" id="2"></td>
+        </tr>
+        <tr>
+            <td class="cell" id="3"></td>
+            <td class="cell" id="4"></td>
+            <td class="cell" id="5"></td>
+        </tr>
+        <tr>
+            <td class="cell" id="6"></td>
+            <td class="cell" id="7"></td>
+            <td class="cell" id="8"></td>
+        </tr>
+    </table>
+    <div class="endgame">
+        <div class="text">You are the winner~!</div>
+        <div class="btn-group">
+            <button class="btn" id="ha">Human vs AI</button>
+            <button class="btn" onclick="startGame()" id="replay">Replay</button>
+            <button class="btn" id="hh">Human vs Human</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -27,7 +27,10 @@ const gameBoard  = (() => {
         }
     }
     function turnClick(square) {
-        turn(square.target.id, huPlayer);
+        if (typeof origBoard[square.target.id] == 'number') {
+            turn(square.target.id, huPlayer);
+            if (!checkTie()) turn(bestSpot(), aiPlayer);
+        }
     }
 
     function turn(squareId, player) {
@@ -57,6 +60,33 @@ const gameBoard  = (() => {
         for(let i = 0; i < cells.length; i++) {
             cells[i].removeEventListener('click', turnClick, false);
         }
+        declareWinner(gameWon.player == huPlayer ? "You win :)" : "You Loos :(")
+    }
+
+    function bestSpot() {
+        return emptySquares()[0];
+    }
+
+    function declareWinner(who) {
+        document.querySelector('.endgame').style.display = 'flex';
+        document.querySelector('.endgame .text').innerText = who;
+
+    }
+
+    function emptySquares() {
+        return origBoard.filter(s => typeof s == 'number');
+    }
+
+    function checkTie() {
+        if (emptySquares().length == 0) {
+            for (let i = 0; i < cells.length; i++) {
+               cells[i].style.backgroundColor = 'green';
+               cells[i].removeEventListener('click', turnClick);
+            }
+            declareWinner('Tie Game!');
+            return true;
+        }
+        return false;
     }
     
  return {
@@ -66,5 +96,5 @@ const gameBoard  = (() => {
 
 
 //change following code from here to right place
-const rePlayBtn = document.getElementById('replay');
-rePlayBtn.addEventListener('click', gameBoard.startGame);
+// const rePlayBtn = document.getElementById('replay');
+// rePlayBtn.addEventListener('click', gameBoard.startGame);

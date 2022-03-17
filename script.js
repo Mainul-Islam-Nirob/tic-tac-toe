@@ -160,17 +160,12 @@ const gameBoard  = (() => {
 })();
 
 
-
-//change following code from here to right place
-
-const gameController = (() => {
+const displayController = (() => {
     const changeOption = document.getElementById('change-option');
     const humanAiEasy = document.getElementById('ha1');
     const humanAiUnbeat = document.getElementById('ha2');
     const humanHuman = document.getElementById('ha');
     const turnContainer = document.getElementById('turn');
-
-
 
 
     humanAiEasy.addEventListener('click', () => changePlayer('easyAi'));

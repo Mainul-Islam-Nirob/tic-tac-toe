@@ -148,5 +148,11 @@ const gameBoard  = (() => {
 
 
 //change following code from here to right place
-// const rePlayBtn = document.getElementById('replay');
-// rePlayBtn.addEventListener('click', gameBoard.startGame);
+const changeOption = document.getElementById('change-option');
+changeOption.addEventListener('click', changePlayer);
+
+function changePlayer() {
+    document.querySelector('.endgame').style.display = 'flex';
+    document.querySelector('.endgame .text').innerText = "Change Player~";
+
+}

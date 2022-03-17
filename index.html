@@ -5,14 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="controller btn-group">
-        <button class="btn" id="change-option">Change Options</button>
-        <button class="btn turn" id="turn">"X" turn!</button>
-        <button onClick = "gameBoard.startGame()" class="btn" id="replay">Replay</button>
+        <button class="btn" id="change-option" title="change player">
+            <i class="fa-solid fa-gear"></i>
+        </button>
+        <button class="btn turn" id="turn"><span id="whose-turn">X</span> 's turn!</button>
+        <button onClick = "gameBoard.startGame()" class="btn" id="replay" title="replay">
+            <i class="fa-solid fa-reply"></i>
+        </button>
     </div>
     <table>
         <tr>
@@ -32,11 +36,20 @@
         </tr>
     </table>
     <div class="endgame">
-        <div class="text">---</div>
+        <div class="text"></div>
         <div class="btn-group">
-            <button class="btn" id="ha">Human vs AI</button>
-            <button onClick = "gameBoard.startGame()" class="btn" id="replay">Replay</button>
-            <button class="btn" id="hh">Human vs Human</button>
+            <button class="btn" id="ha1" title="human vs fool-robot">
+               <i class="fa-solid fa-person"></i> vs <i class="fa-solid fa-robot"></i>
+            </button>
+            <button class="btn" id="ha2" title="human vs unbeatable-robot">
+                <i class="fa-solid fa-person"></i> vs <i class="fa-solid fa-robot"></i>
+            </button>
+            <button class="btn" id="hh" title="human vs human">
+                <i class="fa-solid fa-person"></i> vs <i class="fa-solid fa-person"></i>
+            </button>
+            <button title="replay" onClick = "gameBoard.startGame()" class="btn" id="replay">
+                <i class="fa-solid fa-reply"></i>
+            </button>
         </div>
     </div>
 

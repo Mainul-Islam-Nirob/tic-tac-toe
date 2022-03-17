@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto+Condensed:wght@300;700&family=Roboto:wght@400;500;700;900&display=swap');
 :root {
     --gray1: #192a32;
     --cell: #1f3540;
@@ -54,8 +55,10 @@ td {
     width: 100px;
     text-align: center;
     vertical-align: middle;
-    font-family: "Comic Sans MS", cursive;
+    font-family: 'Roboto',
+    sans-serif;
     font-size: 70px;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -90,12 +93,32 @@ table tr td:last-child {
     border-radius: 5px;
     background-color: var(--result);
     font-size: 2em;
+    animation-name: endgameOpen;
+    animation-duration: .5s;
+
 }
+
+@keyframes endgameOpen {
+    from {
+        opacity: 0;
+        transform: scale(0)
+        translateY(-50%);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1)
+        translateY(-50%);
+    }
+}
+
+
 
 .text {
     color: var(--aqua);
-    font-size: larger;
+    font-size: 40px;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .btn-group {
@@ -109,13 +132,23 @@ table tr td:last-child {
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     cursor: pointer;
     color: var(--gray1);
+    font-size: 20px;
 }
 
-#ha {
+#ha1 {
+    background-color: var(--aqua);
+}
+
+#ha1:hover {
+    background-color: transparent;
+    color: var(--aqua);
+}
+
+#ha2 {
     background-color: var(--yellow);
 }
 
-#ha:hover {
+#ha2:hover {
     background-color: transparent;
     color: var(--yellow);
 }

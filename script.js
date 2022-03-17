@@ -64,7 +64,8 @@ const gameBoard  = (() => {
     }
 
     function bestSpot() {
-        return emptySquares()[0];
+        // return emptySquares()[0];
+        return minmax(origBoard, aiPlayer).index;
     }
 
     function declareWinner(who) {
@@ -88,7 +89,58 @@ const gameBoard  = (() => {
         }
         return false;
     }
+
+    function minmax(newBoard, player){
+        let availSpots = emptySquares(newBoard);
+
+        if (checkWin(newBoard, player)) {
+            return {score: -10};
+        }else if (checkWin(newBoard, aiPlayer)) {
+            return {score: 10};
+        }else if(availSpots.length === 0) {
+            return {score: 0}
+        }
+
+    let moves = [];
+    for (let i = 0; i < availSpots.length; i++) {
+        let move = {};
+        move.index = newBoard[availSpots[i]];
+        newBoard[availSpots[i]] = player;
+
+        if (player == aiPlayer) {
+            var result = minmax(newBoard, huPlayer);
+            move.score = result.score;
+        }else {
+            var result = minmax(newBoard, aiPlayer);
+            move.score = result.score;
+        }
+
+        newBoard[availSpots[i]] = move.index;
+
+        moves.push(move);
+    }
+
+    let bestMove;
+    if (player === aiPlayer) {
+        var bestScore = -10000;
+        for(let i = 0; i < moves.length; i++) {
+            if (moves[i].score > bestScore) {
+                bestScore = moves[i].score;
+                bestMove = i;
+            }
+        }
+        }else {
+            let bestScore = 10000;
+            for(let i = 0; i < moves.length; i++) {
+                if (moves[i].score < bestScore) {
+                    bestScore = moves[i].score;
+                    bestMove = i;
+                }
+            }
+        }
+        return moves[bestMove];
     
+    }
  return {
      startGame
  }

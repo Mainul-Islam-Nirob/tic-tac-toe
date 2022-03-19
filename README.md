@@ -9,3 +9,4 @@ TO DO LIST--
  - change color of X and O
  - Fix Human vs Human functionality issues
  - update readme
+ - change declare winner message

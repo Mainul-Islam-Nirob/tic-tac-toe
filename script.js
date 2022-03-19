@@ -5,9 +5,9 @@ const gameBoard  = (() => {
     let opponentPlayer = 'unbeatAi';
     console.log(opponentPlayer);
 
-    let huPlayer = 'hu';
-    const aiPlayer = 'ai';
-    const opponent = 'op';
+    let huPlayer = 'O';
+    const aiPlayer = 'X';
+    const opponent = 'X';
     const winCombos = [
         [0, 1, 2],
         [3, 4, 5],
@@ -43,7 +43,7 @@ const gameBoard  = (() => {
     }
 
     function changeTurn() {
-         huPlayer = huPlayer == 'hu' ? 'op' : 'hu'
+         huPlayer = huPlayer == 'O' ? 'X' : 'O'
     }
 
     function turnClick(square, player) {

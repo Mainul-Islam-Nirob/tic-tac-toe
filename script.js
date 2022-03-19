@@ -7,7 +7,7 @@ const gameBoard  = (() => {
 
     let huPlayer = 'O';
     const aiPlayer = 'X';
-    const opponent = 'X';
+    const opponent = 'O';
     const winCombos = [
         [0, 1, 2],
         [3, 4, 5],
@@ -35,7 +35,7 @@ const gameBoard  = (() => {
             cells[i].addEventListener('click', (e) => {
                 turnClick(e.target.id, huPlayer);
                 if (opponentPlayer == 'human') {
-                    changeTurn();
+                    // changeTurn();
                 }
             });
         }

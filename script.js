@@ -1,12 +1,13 @@
-
 const gameBoard  = (() => {
     const cells = document.querySelectorAll('.cell');
 
     let origBoard;
-    let playerName = 'unbeatAi';
+    let opponentPlayer = 'unbeatAi';
+    console.log(opponentPlayer);
 
-    const huPlayer = 'O';
-    const aiPlayer = 'X';
+    let huPlayer = 'hu';
+    const aiPlayer = 'ai';
+    const opponent = 'op';
     const winCombos = [
         [0, 1, 2],
         [3, 4, 5],
@@ -19,7 +20,7 @@ const gameBoard  = (() => {
     ]
 
     function setPlayer(player) {
-        playerName = player;
+        opponentPlayer = player;
         startGame();
     }
 
@@ -31,14 +32,26 @@ const gameBoard  = (() => {
         for (let i = 0; i < cells.length; i++) {
             cells[i].innerText = '';
             cells[i].style.removeProperty('background-color');
-            cells[i].addEventListener('click', turnClick);
+            cells[i].addEventListener('click', (e) => {
+                turnClick(e.target.id, huPlayer);
+                if (opponentPlayer == 'human') {
+                    changeTurn();
+                }
+            });
         }
+
     }
 
-    function turnClick(square) {
-        if (typeof origBoard[square.target.id] == 'number') {
-            turn(square.target.id, huPlayer);
-            if (!checkTie()) turn(bestSpot(), aiPlayer);
+    function changeTurn() {
+         huPlayer = huPlayer == 'hu' ? 'op' : 'hu'
+    }
+
+    function turnClick(square, player) {
+        if (typeof origBoard[square] == 'number') {
+            turn(square, player);
+            if (opponentPlayer != 'human') {
+                if (!checkTie()) turn(bestSpot(), aiPlayer);
+            }
         }
     }
 
@@ -71,13 +84,13 @@ const gameBoard  = (() => {
         }
         declareWinner(gameWon.player == huPlayer ? "You win :)" : "You Loos : (")
     }
-
+//***************************************** */
     function bestSpot() {
-        if (playerName == 'easyAi') {
+        if (opponentPlayer == 'easyAi') {
             return emptySquares()[0];
+        }else if(opponentPlayer == 'unbeatAi') {
+            return minmax(origBoard, aiPlayer).index;
         }
-        return minmax(origBoard, aiPlayer).index;
-        
     }
 
     function declareWinner(who) {
@@ -164,13 +177,13 @@ const displayController = (() => {
     const changeOption = document.getElementById('change-option');
     const humanAiEasy = document.getElementById('ha1');
     const humanAiUnbeat = document.getElementById('ha2');
-    const humanHuman = document.getElementById('ha');
+    const humanHuman = document.getElementById('hh');
     const turnContainer = document.getElementById('turn');
 
 
     humanAiEasy.addEventListener('click', () => changePlayer('easyAi'));
     humanAiUnbeat.addEventListener('click', () => changePlayer('unbeatAi'));
-    // humanHuman.addEventListener('click', gameBoard.setPlayer("humanHuman"));
+    humanHuman.addEventListener('click', () => changePlayer('human'));
 
     changeOption.addEventListener('click', showChangePlayer);
 
@@ -181,6 +194,9 @@ const displayController = (() => {
         }else if (player == 'unbeatAi'){
             turnContainer.innerText = 'Human vs CleverAi';
             gameBoard.setPlayer(player) ;
+        }else {
+            turnContainer.innerText = 'Human vs Human';
+            gameBoard.setPlayer(player);
         }
     }
 

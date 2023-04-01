@@ -9,4 +9,3 @@ TO DO LIST--
  - Fix Human vs Human functionality issues
  - update readme
  - change declare winner message
- - disable gameboard after showing

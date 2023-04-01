@@ -26,18 +26,19 @@ const gameBoard  = (() => {
 
     startGame();
 
+    function handleCellClick(e) {
+        turnClick(e.target.id, huPlayer);
+    }
+    
     function startGame() {
         document.querySelector('.endgame').style.display = 'none';
         origBoard = Array.from(Array(9).keys());
         for (let i = 0; i < cells.length; i++) {
             cells[i].innerText = '';
             cells[i].style.removeProperty('background-color');
-            cells[i].addEventListener('click', (e) => {
-                turnClick(e.target.id, huPlayer);
-                if (opponentPlayer == 'human') {
-                    changeTurn();
-                }
-            });
+            cells[i].removeAttribute('disabled'); 
+            cells[i].addEventListener('click', handleCellClick);
+            
         }
 
     }
@@ -82,7 +83,7 @@ const gameBoard  = (() => {
             document.getElementById(index).style.backgroundColor = gameWon.player == huPlayer ? "green" : "red";
         }
         for(let i = 0; i < cells.length; i++) {
-            cells[i].removeEventListener('click', turnClick, false);
+            cells[i].removeEventListener('click', handleCellClick);     
         }
         declareWinner(gameWon.player == huPlayer ? "You win :)" : "You Loos : (")
     }
@@ -98,7 +99,6 @@ const gameBoard  = (() => {
     function declareWinner(who) {
         document.querySelector('.endgame').style.display = 'flex';
         document.querySelector('.endgame .text').innerText = who;
-
     }
 
     function emptySquares() {

@@ -60,6 +60,7 @@ td {
     font-size: 70px;
     font-weight: bold;
     cursor: pointer;
+    color: aqua;
 }
 
 table tr:first-child td {

@@ -7,7 +7,7 @@ const gameBoard  = (() => {
 
     let huPlayer = 'O';
     const aiPlayer = 'X';
-    const opponent = 'O';
+    const opponent = 'Y';
     const winCombos = [
         [0, 1, 2],
         [3, 4, 5],
@@ -35,7 +35,7 @@ const gameBoard  = (() => {
             cells[i].addEventListener('click', (e) => {
                 turnClick(e.target.id, huPlayer);
                 if (opponentPlayer == 'human') {
-                    // changeTurn();
+                    changeTurn();
                 }
             });
         }
@@ -57,7 +57,9 @@ const gameBoard  = (() => {
 
     function turn(squareId, player) {
         origBoard[squareId] = player;
-        document.getElementById(squareId).innerText = player;
+        const cell = document.getElementById(squareId);
+        cell.innerText = player;
+        cell.style.color = player === 'O' ? '#EA5455' : '#19376D'; 
         let gameWon = checkWin(origBoard, player);
         if (gameWon) gameOver(gameWon);
     }
@@ -84,7 +86,7 @@ const gameBoard  = (() => {
         }
         declareWinner(gameWon.player == huPlayer ? "You win :)" : "You Loos : (")
     }
-//***************************************** */
+    //***************************************** */
     function bestSpot() {
         if (opponentPlayer == 'easyAi') {
             return emptySquares()[0];
@@ -126,44 +128,44 @@ const gameBoard  = (() => {
             return {score: 0}
         }
 
-    let moves = [];
-    for (let i = 0; i < availSpots.length; i++) {
-        let move = {};
-        move.index = newBoard[availSpots[i]];
-        newBoard[availSpots[i]] = player;
+        let moves = [];
+        for (let i = 0; i < availSpots.length; i++) {
+            let move = {};
+            move.index = newBoard[availSpots[i]];
+            newBoard[availSpots[i]] = player;
 
-        if (player == aiPlayer) {
-            var result = minmax(newBoard, huPlayer);
-            move.score = result.score;
-        }else {
-            var result = minmax(newBoard, aiPlayer);
-            move.score = result.score;
-        }
-
-        newBoard[availSpots[i]] = move.index;
-
-        moves.push(move);
-    }
-
-    let bestMove;
-    if (player === aiPlayer) {
-        var bestScore = -10000;
-        for(let i = 0; i < moves.length; i++) {
-            if (moves[i].score > bestScore) {
-                bestScore = moves[i].score;
-                bestMove = i;
+            if (player == aiPlayer) {
+                var result = minmax(newBoard, huPlayer);
+                move.score = result.score;
+            }else {
+                var result = minmax(newBoard, aiPlayer);
+                move.score = result.score;
             }
+
+            newBoard[availSpots[i]] = move.index;
+
+            moves.push(move);
         }
-        }else {
-            let bestScore = 10000;
+
+        let bestMove;
+        if (player === aiPlayer) {
+            var bestScore = -10000;
             for(let i = 0; i < moves.length; i++) {
-                if (moves[i].score < bestScore) {
+                if (moves[i].score > bestScore) {
                     bestScore = moves[i].score;
                     bestMove = i;
                 }
             }
-        }
-        return moves[bestMove];
+            }else {
+                let bestScore = 10000;
+                for(let i = 0; i < moves.length; i++) {
+                    if (moves[i].score < bestScore) {
+                        bestScore = moves[i].score;
+                        bestMove = i;
+                    }
+                }
+            }
+            return moves[bestMove];
     
     }
  return {

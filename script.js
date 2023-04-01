@@ -20,6 +20,7 @@ const gameBoard  = (() => {
     ]
 
     function setPlayer(player) {
+        huPlayer = 'O' // remove
         opponentPlayer = player;
         startGame();
     }
@@ -29,7 +30,9 @@ const gameBoard  = (() => {
     function handleCellClick(e) {
         turnClick(e.target.id, huPlayer);
     }
-    
+
+
+
     function startGame() {
         document.querySelector('.endgame').style.display = 'none';
         origBoard = Array.from(Array(9).keys());
@@ -52,6 +55,9 @@ const gameBoard  = (() => {
             turn(square, player);
             if (opponentPlayer != 'human') {
                 if (!checkTie()) turn(bestSpot(), aiPlayer);
+            } else if (opponentPlayer === 'human') {
+                changeTurn();
+                checkTie();
             }
         }
     }
@@ -85,7 +91,8 @@ const gameBoard  = (() => {
         for(let i = 0; i < cells.length; i++) {
             cells[i].removeEventListener('click', handleCellClick);     
         }
-        declareWinner(gameWon.player == huPlayer ? "You win :)" : "You Loos : (")
+       console.log(gameWon.player)
+        declareWinner(gameWon.player == "O" ? "You win :)" : "Robot or Opponent Win : (")
     }
     //***************************************** */
     function bestSpot() {

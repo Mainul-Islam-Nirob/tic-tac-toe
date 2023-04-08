@@ -20,7 +20,7 @@ const gameBoard  = (() => {
     ]
 
     function setPlayer(player) {
-        huPlayer = 'O' // remove
+        huPlayer = 'O'
         opponentPlayer = player;
         startGame();
     }
@@ -30,8 +30,6 @@ const gameBoard  = (() => {
     function handleCellClick(e) {
         turnClick(e.target.id, huPlayer);
     }
-
-
 
     function startGame() {
         document.querySelector('.endgame').style.display = 'none';
@@ -94,7 +92,7 @@ const gameBoard  = (() => {
        console.log(gameWon.player)
         declareWinner(gameWon.player == "O" ? "You win :)" : "Robot or Opponent Win : (")
     }
-    //***************************************** */
+
     function bestSpot() {
         if (opponentPlayer == 'easyAi') {
             return emptySquares()[0];
@@ -208,7 +206,6 @@ const displayController = (() => {
             gameBoard.setPlayer(player);
         }
     }
-
 
     function showChangePlayer() {
         document.querySelector('.endgame').style.display = 'flex';
